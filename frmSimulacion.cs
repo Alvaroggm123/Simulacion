@@ -27,8 +27,8 @@ namespace Simulacion
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
-            
-
+            // Elemento que permite que nos comuniquemos con el panel
+            Graphics G = panelLoading.CreateGraphics();
             Random Ran = new Random();
             // Generamos nuevo objeto de clase PCB
             Procesos[i] = new PCB(
@@ -46,7 +46,7 @@ namespace Simulacion
 
             Pen Lapiz = new Pen(Procesos[i].pcbColor);
             Lapiz.Width = 5;
-            panelLoading.RectangleToScreen(new Rectangle(100,100,10,15));
+            G.DrawRectangle(Lapiz, new Rectangle(10, 10, 5, 10));
             // Recorremos el apuntador
             i++;
         }

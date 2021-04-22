@@ -159,7 +159,6 @@ namespace Simulacion
             this.panelLoading.Name = "panelLoading";
             this.panelLoading.Size = new System.Drawing.Size(776, 291);
             this.panelLoading.TabIndex = 1;
-            this.panelLoading.Click += new System.EventHandler(this.cmdAgregar_Click);
             // 
             // frmSimulacion
             // 
