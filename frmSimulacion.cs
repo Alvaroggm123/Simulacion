@@ -14,7 +14,7 @@ namespace Simulacion
     public partial class frmSimulacion : Form
     {
         /* | Variables globales | */
-        PCB[] Procesos = new PCB[255];
+        List<PCB> Procesos = new List<PCB>();
         string[] Usuarios = { "root", "aggm123", "aranzagtz" };
         string[] Ejecutables = { "Firefox", "Explorer", "Virus", "Chrome", "Calculadora", "Apoint", "Agenservice", "System" };
         int ID = 0, x = 0, y = 0, w = 5, h = 10;
@@ -35,17 +35,17 @@ namespace Simulacion
 
 
             // Asignación de elementos a cajas de texto en caso de que se encuentren nulas.
-            if (txtProccesN.Text == "")
-                txtProccesN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
-            if (txtProccesT.Text == "")
-                txtProccesT.Text = Convert.ToString(Ran.Next(1, 10));
-            // Generamos nuevo objeto de clase PCB
-            Procesos[ID] = new PCB(
+            if (txtProcessN.Text == "")
+                txtProcessN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
+            if (txtProcessM.Text == "")
+                txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
+            // Agregamos nuevo elemento a la lista del PCB
+            Procesos.Add( new PCB(
                 ID,
-                txtProccesN.Text, Usuarios[Ran.Next(0, 3)],
+                txtProcessN.Text, Usuarios[Ran.Next(0, 3)],
                 "new",
-                Convert.ToInt32(txtProccesT.Text));
-            // Agregamos los elementos a la lista
+                Convert.ToInt32(txtProcessM.Text)));
+            // Agregamos los elementos a la lista (Tabla)
             // Definición de la listView
             ListViewItem Elemento =new ListViewItem(Convert.ToString(Procesos[ID].pcbPID));
 
