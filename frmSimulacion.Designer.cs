@@ -31,6 +31,11 @@ namespace Simulacion
         {
             this.grpbProcesos = new System.Windows.Forms.GroupBox();
             this.tabProcesos = new System.Windows.Forms.DataGridView();
+            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmdProcesar = new System.Windows.Forms.Button();
             this.cmdAgregar = new System.Windows.Forms.Button();
             this.txtProccesT = new System.Windows.Forms.TextBox();
@@ -38,11 +43,6 @@ namespace Simulacion
             this.txtProccesN = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelLoading = new System.Windows.Forms.Panel();
-            this.PID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabProcesos)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +76,31 @@ namespace Simulacion
             this.tabProcesos.Name = "tabProcesos";
             this.tabProcesos.Size = new System.Drawing.Size(545, 94);
             this.tabProcesos.TabIndex = 1;
+            // 
+            // PID
+            // 
+            this.PID.HeaderText = "PID";
+            this.PID.Name = "PID";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Tiempo
+            // 
+            this.Tiempo.HeaderText = "Tiempo";
+            this.Tiempo.Name = "Tiempo";
+            // 
+            // Usuario
+            // 
+            this.Usuario.HeaderText = "Usuario";
+            this.Usuario.Name = "Usuario";
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
             // 
             // cmdProcesar
             // 
@@ -134,31 +159,7 @@ namespace Simulacion
             this.panelLoading.Name = "panelLoading";
             this.panelLoading.Size = new System.Drawing.Size(776, 291);
             this.panelLoading.TabIndex = 1;
-            // 
-            // PID
-            // 
-            this.PID.HeaderText = "PID";
-            this.PID.Name = "PID";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Tiempo
-            // 
-            this.Tiempo.HeaderText = "Tiempo";
-            this.Tiempo.Name = "Tiempo";
-            // 
-            // Usuario
-            // 
-            this.Usuario.HeaderText = "Usuario";
-            this.Usuario.Name = "Usuario";
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
+            this.panelLoading.Click += new System.EventHandler(this.cmdAgregar_Click);
             // 
             // frmSimulacion
             // 

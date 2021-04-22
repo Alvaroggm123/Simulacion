@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Simulacion
 {
@@ -16,6 +17,7 @@ namespace Simulacion
         PCB[] Procesos= new PCB[255];
         string[] Usuarios = { "root", "aggm123", "aranzagtz" };
         int i=0;
+        Pen pen;
         /* | Fin Variables globales | */
         public frmSimulacion()
         {
@@ -25,6 +27,8 @@ namespace Simulacion
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
+            
+
             Random Ran = new Random();
             // Generamos nuevo objeto de clase PCB
             Procesos[i] = new PCB(
@@ -40,9 +44,13 @@ namespace Simulacion
             tabProcesos.Rows[i].Cells[3].Value = Procesos[i].pcbUser;
             tabProcesos.Rows[i].Cells[4].Value = Procesos[i].pcbState;
 
+            Pen Lapiz = new Pen(Procesos[i].pcbColor);
+            Lapiz.Width = 5;
+            panelLoading.RectangleToScreen(new Rectangle(100,100,10,15));
             // Recorremos el apuntador
             i++;
         }
+
         /* | Terminan los eventos | */
     }
 }
