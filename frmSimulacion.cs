@@ -16,7 +16,7 @@ namespace Simulacion
         /* | Variables globales | */
         PCB[] Procesos= new PCB[255];
         string[] Usuarios = { "root", "aggm123", "aranzagtz" };
-        int i=0;
+        int ID=0, x=0,y=0,w=5,h=10;
         Pen pen;
         /* | Fin Variables globales | */
         public frmSimulacion()
@@ -31,24 +31,34 @@ namespace Simulacion
             Graphics G = panelLoading.CreateGraphics();
             Random Ran = new Random();
             // Generamos nuevo objeto de clase PCB
-            Procesos[i] = new PCB(
-                i,
+            Procesos[ID] = new PCB(
+                ID,
                 txtProccesN.Text, Usuarios[Ran.Next(0, 3)],
                 "new",
                 Convert.ToInt32(txtProccesT.Text));
             tabProcesos.Rows.Add();
             // Agregamos los parametros de nuestro objeto a la tabla.
-            tabProcesos.Rows[i].Cells[0].Value = Procesos[i].pcbPID;
-            tabProcesos.Rows[i].Cells[1].Value = Procesos[i].pcbName;
-            tabProcesos.Rows[i].Cells[2].Value = Procesos[i].pcbMemory;
-            tabProcesos.Rows[i].Cells[3].Value = Procesos[i].pcbUser;
-            tabProcesos.Rows[i].Cells[4].Value = Procesos[i].pcbState;
+            tabProcesos.Rows[ID].Cells[0].Value = Procesos[ID].pcbPID;
+            tabProcesos.Rows[ID].Cells[1].Value = Procesos[ID].pcbName;
+            tabProcesos.Rows[ID].Cells[2].Value = Procesos[ID].pcbMemory;
+            tabProcesos.Rows[ID].Cells[3].Value = Procesos[ID].pcbUser;
+            tabProcesos.Rows[ID].Cells[4].Value = Procesos[ID].pcbState;
 
-            Pen Lapiz = new Pen(Procesos[i].pcbColor);
+            Pen Lapiz = new Pen(Procesos[ID].pcbColor);
             Lapiz.Width = 5;
-            G.DrawRectangle(Lapiz, new Rectangle(10, 10, 5, 10));
+
+            for(int i = 0; i < Procesos[ID].pcbMemory; i++)
+            {
+                if (x > panelLoading.Width - w)
+                {
+                    y += h*2-3;
+                    x = 0;
+                }
+                G.DrawRectangle(Lapiz, new Rectangle(x, y, w, h));
+                x += w+w/2+4;
+            }
             // Recorremos el apuntador
-            i++;
+            ID++;
         }
 
         /* | Terminan los eventos | */
