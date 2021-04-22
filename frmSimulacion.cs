@@ -14,9 +14,10 @@ namespace Simulacion
     public partial class frmSimulacion : Form
     {
         /* | Variables globales | */
-        PCB[] Procesos= new PCB[255];
+        PCB[] Procesos = new PCB[255];
         string[] Usuarios = { "root", "aggm123", "aranzagtz" };
-        int ID=0, x=0,y=0,w=5,h=10;
+        string[] Ejecutables = { "Firefox", "Explorer", "Virus", "Chrome", "Calculadora", "Apoint", "Agenservice", "System" };
+        int ID = 0, x = 0, y = 0, w = 5, h = 10;
         Pen pen;
         /* | Fin Variables globales | */
         public frmSimulacion()
@@ -29,36 +30,52 @@ namespace Simulacion
         {
             // Elemento que permite que nos comuniquemos con el panel
             Graphics G = panelLoading.CreateGraphics();
+            // Generación de numeros aleatorios
             Random Ran = new Random();
+
+
+            // Asignación de elementos a cajas de texto en caso de que se encuentren nulas.
+            if (txtProccesN.Text == "")
+                txtProccesN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
+            if (txtProccesT.Text == "")
+                txtProccesT.Text = Convert.ToString(Ran.Next(1, 10));
             // Generamos nuevo objeto de clase PCB
             Procesos[ID] = new PCB(
                 ID,
                 txtProccesN.Text, Usuarios[Ran.Next(0, 3)],
                 "new",
                 Convert.ToInt32(txtProccesT.Text));
-            tabProcesos.Rows.Add();
-            // Agregamos los parametros de nuestro objeto a la tabla.
-            tabProcesos.Rows[ID].Cells[0].Value = Procesos[ID].pcbPID;
-            tabProcesos.Rows[ID].Cells[1].Value = Procesos[ID].pcbName;
-            tabProcesos.Rows[ID].Cells[2].Value = Procesos[ID].pcbMemory;
-            tabProcesos.Rows[ID].Cells[3].Value = Procesos[ID].pcbUser;
-            tabProcesos.Rows[ID].Cells[4].Value = Procesos[ID].pcbState;
+            // Agregamos los elementos a la lista
+            // Definición de la listView
+            ListViewItem Elemento =new ListViewItem(Convert.ToString(Procesos[ID].pcbPID));
+
+            Elemento.SubItems.Add(Convert.ToString(Procesos[ID].pcbName));
+            Elemento.SubItems.Add(Convert.ToString(Procesos[ID].pcbMemory));
+            Elemento.SubItems.Add(Convert.ToString(Procesos[ID].pcbUser));
+            Elemento.SubItems.Add(Convert.ToString(Procesos[ID].pcbState));
+            Elemento.BackColor = Procesos[ID].pcbColor;
+            tabProcesos.Items.Add(Elemento);
+            //tabProcesos.Rows[ID].ContextMenuStrip = Procesos[ID].pcbColor;
 
             Pen Lapiz = new Pen(Procesos[ID].pcbColor);
             Lapiz.Width = 5;
 
-            for(int i = 0; i < Procesos[ID].pcbMemory; i++)
+            for (int i = 0; i < Procesos[ID].pcbMemory; i++)
             {
-                if (x > panelLoading.Width - w)
+                if (x > panelLoading.Width - w * 2)
                 {
-                    y += h*2-3;
+                    y += h * 2 - 3;
                     x = 0;
                 }
                 G.DrawRectangle(Lapiz, new Rectangle(x, y, w, h));
-                x += w+w/2+4;
+                x += w + w / 2 + 4;
             }
             // Recorremos el apuntador
             ID++;
+            // Limpiamos las cajas de texto
+            foreach (Control Caja in grpbProcesos.Controls)
+                if (Caja is TextBox)
+                    Caja.Text = "";
         }
 
         /* | Terminan los eventos | */
