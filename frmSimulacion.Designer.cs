@@ -34,7 +34,7 @@ namespace Simulacion
             this.tabProcesos = new System.Windows.Forms.ListView();
             this.PID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Memoria = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EBT = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Usuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Estado = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
@@ -46,8 +46,10 @@ namespace Simulacion
             this.lblProcessM = new System.Windows.Forms.Label();
             this.txtProcessN = new System.Windows.Forms.TextBox();
             this.lblProcessN = new System.Windows.Forms.Label();
-            this.panelLoading = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnelProcessI = new System.Windows.Forms.Panel();
+            this.pnelProcesO = new System.Windows.Forms.Panel();
+            this.pnelCinco = new System.Windows.Forms.Panel();
+            this.Prioridad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +89,8 @@ namespace Simulacion
             this.tabProcesos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PID,
             this.Nombre,
-            this.Memoria,
+            this.Prioridad,
+            this.EBT,
             this.Usuario,
             this.Estado});
             this.tabProcesos.HideSelection = false;
@@ -108,10 +111,10 @@ namespace Simulacion
             this.Nombre.Text = "Nombre";
             this.Nombre.Width = 86;
             // 
-            // Memoria
+            // EBT
             // 
-            this.Memoria.Text = "Memoria";
-            this.Memoria.Width = 53;
+            this.EBT.Text = "EBT";
+            this.EBT.Width = 53;
             // 
             // Usuario
             // 
@@ -203,32 +206,46 @@ namespace Simulacion
             this.lblProcessN.TabIndex = 1;
             this.lblProcessN.Text = "Nombre del proceso: ";
             // 
-            // panelLoading
+            // pnelProcessI
             // 
-            this.panelLoading.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelLoading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLoading.Enabled = false;
-            this.panelLoading.Location = new System.Drawing.Point(12, 192);
-            this.panelLoading.Name = "panelLoading";
-            this.panelLoading.Size = new System.Drawing.Size(375, 236);
-            this.panelLoading.TabIndex = 1;
+            this.pnelProcessI.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelProcessI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnelProcessI.Location = new System.Drawing.Point(12, 192);
+            this.pnelProcessI.Name = "pnelProcessI";
+            this.pnelProcessI.Size = new System.Drawing.Size(384, 179);
+            this.pnelProcessI.TabIndex = 1;
             // 
-            // panel1
+            // pnelProcesO
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(413, 192);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 236);
-            this.panel1.TabIndex = 2;
+            this.pnelProcesO.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelProcesO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnelProcesO.Location = new System.Drawing.Point(404, 192);
+            this.pnelProcesO.Name = "pnelProcesO";
+            this.pnelProcesO.Size = new System.Drawing.Size(384, 179);
+            this.pnelProcesO.TabIndex = 2;
+            // 
+            // pnelCinco
+            // 
+            this.pnelCinco.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelCinco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnelCinco.Location = new System.Drawing.Point(12, 377);
+            this.pnelCinco.Name = "pnelCinco";
+            this.pnelCinco.Size = new System.Drawing.Size(776, 191);
+            this.pnelCinco.TabIndex = 3;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.Text = "Prioridad";
             // 
             // frmSimulacion
             // 
             this.AcceptButton = this.cmdAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 440);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panelLoading);
+            this.ClientSize = new System.Drawing.Size(803, 585);
+            this.Controls.Add(this.pnelCinco);
+            this.Controls.Add(this.pnelProcesO);
+            this.Controls.Add(this.pnelProcessI);
             this.Controls.Add(this.grpbProcesos);
             this.Name = "frmSimulacion";
             this.Text = "Simulacion de procesos";
@@ -254,12 +271,14 @@ namespace Simulacion
         private System.Windows.Forms.ListView tabProcesos;
         private System.Windows.Forms.ColumnHeader PID;
         private System.Windows.Forms.ColumnHeader Nombre;
-        private System.Windows.Forms.ColumnHeader Memoria;
+        private System.Windows.Forms.ColumnHeader EBT;
         private System.Windows.Forms.ColumnHeader Usuario;
         private System.Windows.Forms.ColumnHeader Estado;
         private System.Windows.Forms.Label lblPCB;
-        private System.Windows.Forms.Panel panelLoading;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnelProcessI;
+        private System.Windows.Forms.Panel pnelProcesO;
+        private System.Windows.Forms.Panel pnelCinco;
+        private System.Windows.Forms.ColumnHeader Prioridad;
     }
 }
 

@@ -1,9 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
+﻿/* |=========================================================| */
+/* |====|          Simulacion de procesos en SO         |====| */
+/* |=========================================================| */
+/* |====| */ using System;                           /* |====| */
+/* |====| */ using System.Collections.Generic;       /* |====| */
+/* |====| */ using System.Linq;                      /* |====| */
+/* |====| */ using System.Threading.Tasks;           /* |====| */
+/* |====| */ using System.Windows.Forms;             /* |====| */
+/* |====| */ using System.Drawing;                   /* |====| */
+/* |=========================================================| */
+/* |====| Aspectos principales a evaluar en el proyecto |====| */
+/* |=========================================================| */
+/* |                                                         | */
+/* | Para  el  proyecto  se  contemplara  el algoritmo Round | */
+/* | Robin con  prioridad,  para  definir las prioridades se | */
+/* | establecio  la  plantilla  que  Windows  10  tiene  por | */
+/* | defecto, al menos hata este momento.                    | */
+/* |                                                         | */
+/* |=========================================================| */
+/* |                                                         | */
+/* |              Alumnos y numeros de control:              | */
+/* |     González Martínez Álvaro Gabriel - 19211651         | */
+/* |              Gutierrez Mora Aranza -                    | */
+/* |                                                         | */
+/* |=========================================================| */
+/* |                                                         | */
+/* |                 Prioridad de procesos                   | */
+/* |                                                         | */
+/* |    _________________________________________________    | */
+/* |    | Nombre de la prioridad del proceso  |  Valor  |    | */
+/* |    |-----------------------------------------------|    | */
+/* |    | Tiempo real                         |    1    |    | */
+/* |    | Alta prioridad                      |    2    |    | */
+/* |    | Prioridad arriba de la normal       |    3    |    | */
+/* |    | Prioridad normal                    |    4    |    | */
+/* |    | Prioridad de bajo de la normal      |    5    |    | */
+/* |    | Baja prioridad                      |    6    |    | */
+/* |    |_____________________________________|_________|    | */
+/* |                                                         | */
+/* |=========================================================| */
+/* |                                                         | */
+/* |                 Estados disponibles                     | */
+/* |                                                         | */
+/* |    _________________________________________________    | */
+/* |    |    Nombre del estado del proceso    |  Valor  |    | */
+/* |    |-----------------------------------------------|    | */
+/* |    | Estado de nuevo       ( New     )   |    1    |    | */
+/* |    | Estado de listo       ( Ready   )   |    2    |    | */
+/* |    | Estado en ejecucion   ( Running )   |    3    |    | */
+/* |    | Estado de bloqueo     ( Blocked )   |    4    |    | */
+/* |    | Estado de finalizado  ( Exit    )   |    5    |    | */
+/* |    |_____________________________________|_________|    | */
+/* |                                                         | */
+/* |=========================================================| */
 
 namespace Simulacion
 {
@@ -23,23 +71,32 @@ namespace Simulacion
     /* | Comienzan las clases | */
     public class PCB
     {
-        // Campos de clase
-        public Color pcbColor { get; set; }
-        public string pcbName { get; set; }
-        public string pcbUser { get; set; }
-        public string pcbState { get; set; }
-        public int pcbPID { get; set; }
-        public int pcbMemory { get; set; }
-        // Constructor con parametros de entrada
-        public PCB(int pcbPID, string pcbName, string pcbUser, string pcbState, int pcbMemory)
+        /* |==| Campos de clase |==| */
+        public int pcbPID { get; set; }     // Identificador unico del PCB
+        public string pcbName { get; set; } // Nombre que conserva el PCB 
+        public int pcbPriority { get; set; }  // Prioridad del PCB
+        public int pcbMemory { get; set; }  // EBT (Estimated Burst time) (Ciclos que requiere)
+        public string pcbUser { get; set; } // Usuario que se registra en el PCB
+        public int pcbState { get; set; }// Estado en el que se encuentra el PCB
+        public Color pcbColor { get; set; } // Color que conserva el PCB
+
+        /* |==| Constructor con parametros de entrada |==| */
+        public PCB(int pcbPID, string pcbName, int pcbPriority, string pcbUser, int pcbState, int pcbMemory)
         {
+            // Variable que permitira generar parametros aleatorios.
             Random Ran = new Random();
+            // Asignacion de parametros en campos.
             this.pcbPID = pcbPID;
             this.pcbName = pcbName;
+            this.pcbPriority = pcbPriority;
             this.pcbMemory = pcbMemory;
             this.pcbUser = pcbUser;
             this.pcbState = pcbState;
-            pcbColor = Color.FromArgb(Ran.Next(0, 255), Ran.Next(0, 255), Ran.Next(0, 255));
+            pcbColor = Color.FromArgb(Ran.Next(100, 255), Ran.Next(100, 255), Ran.Next(100, 255));
+        }
+        public void cambioPCB()
+        {
+
         }
     }
 }

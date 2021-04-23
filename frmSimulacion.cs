@@ -17,7 +17,7 @@ namespace Simulacion
         string[] Usuarios = { "root", "aggm123", "aranzagtz", "Anonymous" };
         string[] Ejecutables = { "Firefox", "Explorer", "Virus", "Chrome", "Calculadora", "Apoint", "Agenservice", "System" };
         int Index = 0, w = 5, h = 10;
-        int x = 0, y = 0;
+        int x = 4, y = 0;
 
         private void cmdProcesar_Click(object sender, EventArgs e)
         {
@@ -27,16 +27,9 @@ namespace Simulacion
                 int i = 0;
                 List<PCB> ProcesosOrd = Process.ToList();
                 ProcesosOrd.Sort((p, q) => p.pcbMemory.CompareTo(q.pcbMemory));
-                Dibuja(ProcesosOrd, panel1);
-            }
-            else
-            {
-
+                Dibuja(ProcesosOrd, pnelProcesO);
             }
         }
-
-        Pen pen;
-        /* | Fin Variables globales | */
         public frmSimulacion()
         {
             InitializeComponent();
@@ -56,12 +49,14 @@ namespace Simulacion
                 txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
             // Agregamos nuevo elemento a la lista del PCB
             Process.Add(new PCB(
-                Index,
-                txtProcessN.Text, Usuarios[Ran.Next(0, 3)],
-                "new",
-                Convert.ToInt32(txtProcessM.Text)));
+                Index,                              // Identificador unico
+                txtProcessN.Text,                   // Nombre
+                Ran.Next(1, 6),                     // Prioridad
+                Usuarios[Ran.Next(0, 3)],           // Usuario
+                0,                                  // Estado ( Nuevo )
+                Convert.ToInt32(txtProcessM.Text)));// EBT 
             // Llamamos al evento que imprime los rectangulos
-            Dibuja(Process, panelLoading);
+            Dibuja(Process, pnelProcessI);
 
 
             // Agregamos los elementos a la lista (Tabla)
@@ -69,6 +64,7 @@ namespace Simulacion
             ListViewItem Elemento = new ListViewItem(Convert.ToString(Process[Index].pcbPID));
 
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbName));
+            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbUser));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbState));
@@ -100,17 +96,18 @@ namespace Simulacion
 
                 for (int j = 0; j < Procesos[i].pcbMemory; j++)
                 {
-                    if (x > panelLoading.Width - w * 2)
+                    if (x > panel.Width - w * 3)
                     {
                         y += h * 2 - 3;
-                        x = 0;
+                        x = 4;
                     }
+                    G.DrawRectangle(new Pen(Color.DarkOliveGreen), new Rectangle(x - 3, y - 3, w + 6, h + 6));
                     G.DrawRectangle(Lapiz, new Rectangle(x, y, w, h));
-                    x += w + w / 2 + 4;
+                    x += w + w / 2 + 6;
                 }
                 i++;
             }
-            x = 0; y = x;
+            x = 4; y = 0;
         }
     }
 }
