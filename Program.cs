@@ -72,13 +72,13 @@ namespace Simulacion
     public class PCB
     {
         /* |==| Campos de clase |==| */
-        public int pcbPID { get; set; }     // Identificador unico del PCB
-        public string pcbName { get; set; } // Nombre que conserva el PCB 
-        public int pcbPriority { get; set; }  // Prioridad del PCB
-        public int pcbMemory { get; set; }  // EBT (Estimated Burst time) (Ciclos que requiere)
-        public string pcbUser { get; set; } // Usuario que se registra en el PCB
-        public int pcbState { get; set; }// Estado en el que se encuentra el PCB
-        public Color pcbColor { get; set; } // Color que conserva el PCB
+        public int pcbPID { get; set; }         // Identificador unico del PCB
+        public string pcbName { get; set; }     // Nombre que conserva el PCB 
+        public int pcbPriority { get; set; }    // Prioridad del PCB
+        public int pcbMemory { get; set; }      // EBT (Estimated Burst time) (Ciclos que requiere)
+        public string pcbUser { get; set; }     // Usuario que se registra en el PCB
+        public int pcbState { get; set; }       // Estado en el que se encuentra el PCB
+        public Color[] pcbColor = new Color[2]; // Color que conserva el PCB
 
         /* |==| Constructor con parametros de entrada |==| */
         public PCB(int pcbPID, string pcbName, int pcbPriority, string pcbUser, int pcbState, int pcbMemory)
@@ -92,7 +92,28 @@ namespace Simulacion
             this.pcbMemory = pcbMemory;
             this.pcbUser = pcbUser;
             this.pcbState = pcbState;
-            pcbColor = Color.FromArgb(Ran.Next(100, 255), Ran.Next(100, 255), Ran.Next(100, 255));
+            pcbColor[0] = Color.FromArgb(Ran.Next(100, 255), Ran.Next(100, 255), Ran.Next(100, 255));
+            switch (pcbPriority)
+            {
+                case 1:
+                    pcbColor[1] = Color.DarkBlue;
+                    break;
+                case 2:
+                    pcbColor[1] = Color.DarkGreen;
+                    break;
+                case 3:
+                    pcbColor[1] = Color.DarkCyan;
+                    break;
+                case 4:
+                    pcbColor[1] = Color.DarkGray;
+                    break;
+                case 5:
+                    pcbColor[1] = Color.Red;
+                    break;
+                case 6:
+                    pcbColor[1] = Color.Magenta;
+                    break;
+            }
         }
         public void cambioPCB()
         {

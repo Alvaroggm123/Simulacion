@@ -26,7 +26,8 @@ namespace Simulacion
             {
                 int i = 0;
                 List<PCB> ProcesosOrd = Process.ToList();
-                ProcesosOrd.Sort((p, q) => p.pcbMemory.CompareTo(q.pcbMemory));
+                // Ordenamos con base en la prioridad
+                ProcesosOrd.Sort((p, q) => p.pcbPriority.CompareTo(q.pcbPriority));
                 Dibuja(ProcesosOrd, pnelProcesO);
             }
         }
@@ -40,21 +41,28 @@ namespace Simulacion
         {
             // Generación de numeros aleatorios
             Random Ran = new Random();
-
+            string Usuario = Usuarios[Ran.Next(0, Usuarios.Length)];
 
             // Asignación de elementos a cajas de texto en caso de que se encuentren nulas.
-            if (txtProcessN.Text == "")
-                txtProcessN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
-            if (txtProcessM.Text == "")
-                txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
+            if (txtProcessM.Text != "" && txtProcessN.Text != "")
+                Usuario = "Dios";
+            else
+            {
+                if (txtProcessN.Text == "")
+                    txtProcessN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
+                if (txtProcessM.Text == "")
+                    txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
+            }
+
             // Agregamos nuevo elemento a la lista del PCB
             Process.Add(new PCB(
-                Index,                              // Identificador unico
-                txtProcessN.Text,                   // Nombre
-                Ran.Next(1, 6),                     // Prioridad
-                Usuarios[Ran.Next(0, 3)],           // Usuario
-                0,                                  // Estado ( Nuevo )
-                Convert.ToInt32(txtProcessM.Text)));// EBT 
+                Index,                                  // Identificador unico
+                txtProcessN.Text,                       // Nombre
+                Ran.Next(1, 6),                         // Prioridad
+                Usuario,                                // Usuario
+                0,                                      // Estado ( Nuevo )
+                Convert.ToInt32(txtProcessM.Text)));    // EBT 
+
             // Llamamos al evento que imprime los rectangulos
             Dibuja(Process, pnelProcessI);
 
@@ -63,12 +71,13 @@ namespace Simulacion
             // Definición de la listView
             ListViewItem Elemento = new ListViewItem(Convert.ToString(Process[Index].pcbPID));
 
+            // Ingresamos elementos de cada sub itemn del PCB
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbName));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbUser));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbState));
-            Elemento.BackColor = Process[Index].pcbColor;
+            Elemento.BackColor = Process[Index].pcbColor[0];
             tabProcesos.Items.Add(Elemento);
 
             // Recorremos el apuntador
@@ -89,24 +98,31 @@ namespace Simulacion
 
             // Index local
             int i = 0;
-            foreach(PCB Proceso in Procesos)
+            foreach (PCB Proceso in Procesos)
             {
-                Pen Lapiz = new Pen(Procesos[i].pcbColor);
-                Lapiz.Width = 5;
+                Pen [] Lapiz = new Pen[2];
+                Lapiz[0] = new Pen(Procesos[i].pcbColor[1]);
+                Lapiz[1] = new Pen(Procesos[i].pcbColor[0]);
+                Lapiz[0].Width = 6;
+                Lapiz[1].Width = 6;
 
                 for (int j = 0; j < Procesos[i].pcbMemory; j++)
                 {
+                    // Validamos que el cursor se encuentre dentro del rango de las x
                     if (x > panel.Width - w * 3)
                     {
                         y += h * 2 - 3;
                         x = 4;
                     }
-                    G.DrawRectangle(new Pen(Color.DarkOliveGreen), new Rectangle(x - 3, y - 3, w + 6, h + 6));
-                    G.DrawRectangle(Lapiz, new Rectangle(x, y, w, h));
+                    // Dibujamos los rectangulos que permiten ver la prioridad y el proceso
+                    G.DrawRectangle(Lapiz[0], new Rectangle(x, y - 1, w, h + 2));
+                    G.DrawRectangle(Lapiz[1], new Rectangle(x, y, w, h / 2));
                     x += w + w / 2 + 6;
                 }
+                // Cambiamos el index del elemento a imprimir
                 i++;
             }
+            // Reposicionamos el cursor del panel
             x = 4; y = 0;
         }
     }

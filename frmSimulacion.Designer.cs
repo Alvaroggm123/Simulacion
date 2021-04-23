@@ -86,6 +86,7 @@ namespace Simulacion
             // 
             // tabProcesos
             // 
+            this.tabProcesos.BackColor = System.Drawing.Color.DimGray;
             this.tabProcesos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PID,
             this.Nombre,
@@ -176,7 +177,10 @@ namespace Simulacion
             // 
             // txtProcessM
             // 
+            this.txtProcessM.BackColor = System.Drawing.Color.DimGray;
+            this.txtProcessM.ForeColor = System.Drawing.SystemColors.Menu;
             this.txtProcessM.Location = new System.Drawing.Point(171, 87);
+            this.txtProcessM.MaxLength = 2;
             this.txtProcessM.Name = "txtProcessM";
             this.txtProcessM.Size = new System.Drawing.Size(48, 20);
             this.txtProcessM.TabIndex = 4;
@@ -192,6 +196,8 @@ namespace Simulacion
             // 
             // txtProcessN
             // 
+            this.txtProcessN.BackColor = System.Drawing.Color.DimGray;
+            this.txtProcessN.ForeColor = System.Drawing.SystemColors.Menu;
             this.txtProcessN.Location = new System.Drawing.Point(120, 53);
             this.txtProcessN.Name = "txtProcessN";
             this.txtProcessN.Size = new System.Drawing.Size(99, 20);
@@ -208,7 +214,7 @@ namespace Simulacion
             // 
             // pnelProcessI
             // 
-            this.pnelProcessI.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelProcessI.BackColor = System.Drawing.Color.DimGray;
             this.pnelProcessI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnelProcessI.Location = new System.Drawing.Point(12, 192);
             this.pnelProcessI.Name = "pnelProcessI";
@@ -217,7 +223,7 @@ namespace Simulacion
             // 
             // pnelProcesO
             // 
-            this.pnelProcesO.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelProcesO.BackColor = System.Drawing.Color.DimGray;
             this.pnelProcesO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnelProcesO.Location = new System.Drawing.Point(404, 192);
             this.pnelProcesO.Name = "pnelProcesO";
@@ -226,7 +232,7 @@ namespace Simulacion
             // 
             // pnelCinco
             // 
-            this.pnelCinco.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnelCinco.BackColor = System.Drawing.Color.DimGray;
             this.pnelCinco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnelCinco.Location = new System.Drawing.Point(12, 377);
             this.pnelCinco.Name = "pnelCinco";
@@ -242,6 +248,7 @@ namespace Simulacion
             this.AcceptButton = this.cmdAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(803, 585);
             this.Controls.Add(this.pnelCinco);
             this.Controls.Add(this.pnelProcesO);
