@@ -35,6 +35,8 @@ namespace Simulacion
             this.tabProcesos = new System.Windows.Forms.ListView();
             this.PID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Prioridad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pcbInTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EBT = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Usuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Estado = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,8 +52,9 @@ namespace Simulacion
             this.pnelProcessI = new System.Windows.Forms.Panel();
             this.pnelProcesO = new System.Windows.Forms.Panel();
             this.pnelCinco = new System.Windows.Forms.Panel();
-            this.Prioridad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pcbInTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).BeginInit();
             this.SuspendLayout();
@@ -114,6 +117,14 @@ namespace Simulacion
             // 
             this.Nombre.Text = "Nombre";
             this.Nombre.Width = 83;
+            // 
+            // Prioridad
+            // 
+            this.Prioridad.Text = "Prioridad";
+            // 
+            // pcbInTime
+            // 
+            this.pcbInTime.Text = "Llegada";
             // 
             // EBT
             // 
@@ -225,36 +236,58 @@ namespace Simulacion
             // 
             this.pnelProcessI.BackColor = System.Drawing.Color.DimGray;
             this.pnelProcessI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnelProcessI.Location = new System.Drawing.Point(12, 192);
+            this.pnelProcessI.Location = new System.Drawing.Point(12, 213);
             this.pnelProcessI.Name = "pnelProcessI";
-            this.pnelProcessI.Size = new System.Drawing.Size(384, 179);
-            this.pnelProcessI.TabIndex = 1;
+            this.pnelProcessI.Size = new System.Drawing.Size(384, 158);
+            this.pnelProcessI.TabIndex = 2;
             // 
             // pnelProcesO
             // 
             this.pnelProcesO.BackColor = System.Drawing.Color.DimGray;
             this.pnelProcesO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnelProcesO.Location = new System.Drawing.Point(404, 192);
+            this.pnelProcesO.Location = new System.Drawing.Point(404, 213);
             this.pnelProcesO.Name = "pnelProcesO";
-            this.pnelProcesO.Size = new System.Drawing.Size(384, 179);
-            this.pnelProcesO.TabIndex = 2;
+            this.pnelProcesO.Size = new System.Drawing.Size(384, 158);
+            this.pnelProcesO.TabIndex = 4;
             // 
             // pnelCinco
             // 
             this.pnelCinco.BackColor = System.Drawing.Color.DimGray;
             this.pnelCinco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnelCinco.Location = new System.Drawing.Point(12, 377);
+            this.pnelCinco.Location = new System.Drawing.Point(12, 409);
             this.pnelCinco.Name = "pnelCinco";
-            this.pnelCinco.Size = new System.Drawing.Size(776, 191);
-            this.pnelCinco.TabIndex = 3;
+            this.pnelCinco.Size = new System.Drawing.Size(776, 159);
+            this.pnelCinco.TabIndex = 6;
             // 
-            // Prioridad
+            // label1
             // 
-            this.Prioridad.Text = "Prioridad";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(113, 197);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Representación del proceso original:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // pcbInTime
+            // label2
             // 
-            this.pcbInTime.Text = "Llegada";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(467, 197);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(253, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Ordenamiento del proceso con base en su prioridad:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(234, 393);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(324, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Ejecución de los procesos con base en planificación Round Robin:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmSimulacion
             // 
@@ -263,6 +296,9 @@ namespace Simulacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(803, 585);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pnelCinco);
             this.Controls.Add(this.pnelProcesO);
             this.Controls.Add(this.pnelProcessI);
@@ -275,6 +311,7 @@ namespace Simulacion
             this.grpbProcesos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -302,6 +339,9 @@ namespace Simulacion
         private System.Windows.Forms.Panel pnelCinco;
         private System.Windows.Forms.ColumnHeader Prioridad;
         private System.Windows.Forms.ColumnHeader pcbInTime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 
