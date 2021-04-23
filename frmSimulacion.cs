@@ -66,11 +66,18 @@ namespace Simulacion
                     txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
             }
 
-            // Agregamos nuevo elemento a la lista del PCB
+            // Validamos el tiempo de llegada con base en el anterior (si es que existe)
+            // y la cantidad de ciclos que se le aplicarán.
+            int InTime = 0;
+            if (Index > 0) InTime = Ran.Next(Process[Index-1].pcbInTime, Process[Index-1].pcbInTime + 
+                Process[Index-1].pcbMemory);
+
+            // Agregamos nuevo elemento a la lista del PCB.
             Process.Add(new PCB(
                 Index,                                  // Identificador unico
                 txtProcessN.Text,                       // Nombre
                 Ran.Next(1, 6),                         // Prioridad
+                InTime,
                 Usuario,                                // Usuario
                 0,                                      // Estado ( Nuevo )
                 Convert.ToInt32(txtProcessM.Text)));    // EBT 
@@ -86,6 +93,7 @@ namespace Simulacion
             // Ingresamos elementos de cada sub itemn del PCB
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbName));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
+            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbInTime));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbUser));
             Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbState));

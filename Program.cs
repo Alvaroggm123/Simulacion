@@ -75,13 +75,15 @@ namespace Simulacion
         public int pcbPID { get; set; }         // Identificador unico del PCB
         public string pcbName { get; set; }     // Nombre que conserva el PCB 
         public int pcbPriority { get; set; }    // Prioridad del PCB
+        public int pcbInTime { get; set; }      // Orden de llegada del proceso
         public int pcbMemory { get; set; }      // EBT (Estimated Burst time) (Ciclos que requiere)
         public string pcbUser { get; set; }     // Usuario que se registra en el PCB
         public int pcbState { get; set; }       // Estado en el que se encuentra el PCB
+
         public Color[] pcbColor = new Color[2]; // Color que conserva el PCB
 
         /* |==| Constructor con parametros de entrada |==| */
-        public PCB(int pcbPID, string pcbName, int pcbPriority, string pcbUser, int pcbState, int pcbMemory)
+        public PCB(int pcbPID, string pcbName, int pcbPriority,int pcbInTime, string pcbUser, int pcbState, int pcbMemory)
         {
             // Variable que permitira generar parametros aleatorios.
             Random Ran = new Random();
@@ -89,9 +91,12 @@ namespace Simulacion
             this.pcbPID = pcbPID;
             this.pcbName = pcbName;
             this.pcbPriority = pcbPriority;
+            this.pcbInTime = pcbInTime;
             this.pcbMemory = pcbMemory;
             this.pcbUser = pcbUser;
             this.pcbState = pcbState;
+
+            // Asignamos colores para la prioridad e identificador.
             pcbColor[0] = Color.FromArgb(Ran.Next(100, 255), Ran.Next(100, 255), Ran.Next(100, 255));
             switch (pcbPriority)
             {
@@ -114,10 +119,6 @@ namespace Simulacion
                     pcbColor[1] = Color.Magenta;
                     break;
             }
-        }
-        public void cambioPCB()
-        {
-
         }
     }
 }

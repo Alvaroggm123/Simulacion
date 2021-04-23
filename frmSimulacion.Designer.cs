@@ -51,6 +51,7 @@ namespace Simulacion
             this.pnelProcesO = new System.Windows.Forms.Panel();
             this.pnelCinco = new System.Windows.Forms.Panel();
             this.Prioridad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pcbInTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).BeginInit();
             this.SuspendLayout();
@@ -78,7 +79,7 @@ namespace Simulacion
             // lblPCB
             // 
             this.lblPCB.AutoSize = true;
-            this.lblPCB.Location = new System.Drawing.Point(508, 19);
+            this.lblPCB.Location = new System.Drawing.Point(445, 16);
             this.lblPCB.Name = "lblPCB";
             this.lblPCB.Size = new System.Drawing.Size(86, 13);
             this.lblPCB.TabIndex = 8;
@@ -92,21 +93,22 @@ namespace Simulacion
             this.PID,
             this.Nombre,
             this.Prioridad,
+            this.pcbInTime,
             this.EBT,
             this.Usuario,
             this.Estado});
             this.tabProcesos.HideSelection = false;
-            this.tabProcesos.Location = new System.Drawing.Point(330, 35);
+            this.tabProcesos.Location = new System.Drawing.Point(276, 35);
             this.tabProcesos.Name = "tabProcesos";
-            this.tabProcesos.Size = new System.Drawing.Size(440, 128);
+            this.tabProcesos.Size = new System.Drawing.Size(494, 128);
             this.tabProcesos.TabIndex = 9;
             this.tabProcesos.UseCompatibleStateImageBehavior = false;
             this.tabProcesos.View = System.Windows.Forms.View.Details;
             // 
             // PID
             // 
-            this.PID.Text = "Identificador";
-            this.PID.Width = 71;
+            this.PID.Text = "PID";
+            this.PID.Width = 30;
             // 
             // Nombre
             // 
@@ -131,7 +133,7 @@ namespace Simulacion
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(250, 19);
+            this.label4.Location = new System.Drawing.Point(222, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 8;
@@ -151,7 +153,7 @@ namespace Simulacion
             // 
             this.tackQuantum.BackColor = System.Drawing.Color.DimGray;
             this.tackQuantum.LargeChange = 2;
-            this.tackQuantum.Location = new System.Drawing.Point(253, 35);
+            this.tackQuantum.Location = new System.Drawing.Point(225, 35);
             this.tackQuantum.Minimum = 1;
             this.tackQuantum.Name = "tackQuantum";
             this.tackQuantum.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -250,6 +252,10 @@ namespace Simulacion
             // 
             this.Prioridad.Text = "Prioridad";
             // 
+            // pcbInTime
+            // 
+            this.pcbInTime.Text = "Llegada";
+            // 
             // frmSimulacion
             // 
             this.AcceptButton = this.cmdAgregar;
@@ -295,6 +301,7 @@ namespace Simulacion
         private System.Windows.Forms.Panel pnelProcesO;
         private System.Windows.Forms.Panel pnelCinco;
         private System.Windows.Forms.ColumnHeader Prioridad;
+        private System.Windows.Forms.ColumnHeader pcbInTime;
     }
 }
 
