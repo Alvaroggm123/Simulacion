@@ -95,9 +95,9 @@ namespace Simulacion
             this.Usuario,
             this.Estado});
             this.tabProcesos.HideSelection = false;
-            this.tabProcesos.Location = new System.Drawing.Point(286, 35);
+            this.tabProcesos.Location = new System.Drawing.Point(330, 35);
             this.tabProcesos.Name = "tabProcesos";
-            this.tabProcesos.Size = new System.Drawing.Size(484, 128);
+            this.tabProcesos.Size = new System.Drawing.Size(440, 128);
             this.tabProcesos.TabIndex = 9;
             this.tabProcesos.UseCompatibleStateImageBehavior = false;
             this.tabProcesos.View = System.Windows.Forms.View.Details;
@@ -129,7 +129,7 @@ namespace Simulacion
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(222, 19);
+            this.label4.Location = new System.Drawing.Point(250, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 8;
@@ -147,12 +147,17 @@ namespace Simulacion
             // 
             // tackQuantum
             // 
-            this.tackQuantum.Location = new System.Drawing.Point(225, 35);
+            this.tackQuantum.BackColor = System.Drawing.Color.DimGray;
+            this.tackQuantum.LargeChange = 2;
+            this.tackQuantum.Location = new System.Drawing.Point(253, 35);
             this.tackQuantum.Minimum = 1;
             this.tackQuantum.Name = "tackQuantum";
             this.tackQuantum.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tackQuantum.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tackQuantum.RightToLeftLayout = true;
             this.tackQuantum.Size = new System.Drawing.Size(45, 128);
             this.tackQuantum.TabIndex = 6;
+            this.tackQuantum.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tackQuantum.Value = 1;
             // 
             // cmdProcesar
