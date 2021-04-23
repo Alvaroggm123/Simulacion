@@ -12,30 +12,42 @@ namespace Simulacion
 {
     public partial class frmSimulacion : Form
     {
-        /* | Variables globales | */
+        /* |=========================================================| */
+        /* |====|            Variables globales                 |====| */
+        /* |=========================================================| */
         List<PCB> Process = new List<PCB>();
-        string[] Usuarios = { "root", "aggm123", "aranzagtz", "Anonymous" };
-        string[] Ejecutables = { "Firefox", "Explorer", "Virus", "Chrome", "Calculadora", "Apoint", "Agenservice", "System" };
-        int Index = 0, w = 5, h = 10;
-        int x = 4, y = 0;
-
+        string[] Usuarios = { "root", "aggm123", "aranzagtz",
+        /* |==========| */    "Anonymous","Erasmo","MikeCrack",
+        /* |==========| */    "Rubiuh","Vegeta777","Kim.com" };
+        string[] Ejecutables = { "Firefox", "Explorer", "Virus",
+        /* |=============| */    "Chrome", "Calculadora", "Apoint",
+        /* |=============| */    "Agenservice", "System","Phishing" };
+        // Index, width, height, xCoord, yCoord, RoundRobinPosition
+        int Index = 0, w = 5, h = 10, x = 4, y = 0, rrIndex = 0;
+        /* |=========================================================| */
+        /* |====|          Comienzan los eventos                |====| */
+        /* |=========================================================| */
+        public frmSimulacion()
+        {
+            InitializeComponent();
+        }
+        /* |=========================================================| */
+        /* |====|             Comienzan los eventos             |====| */
+        /* |=========================================================| */
         private void cmdProcesar_Click(object sender, EventArgs e)
         {
             // Validamos que existan elementos en la lista
             if (Index >= 2)
             {
-                int i = 0;
-                List<PCB> ProcesosOrd = Process.ToList();
-                // Ordenamos con base en la prioridad
-                ProcesosOrd.Sort((p, q) => p.pcbPriority.CompareTo(q.pcbPriority));
-                Dibuja(ProcesosOrd, pnelProcesO);
+                // Compiamos lista respecto a la original
+                // considerando cambiar de ruta de memoria
+                List<PCB> Procesosround = Process.ToList();
+
+                // Llamamos al metodo de dibujo del 
+                Dibuja(Procesosround, pnelProcesO);
+                RoundR(Procesosround);
             }
         }
-        public frmSimulacion()
-        {
-            InitializeComponent();
-        }
-        /* | Comienzan los eventos | */
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
@@ -87,10 +99,16 @@ namespace Simulacion
                 if (Caja is TextBox)
                     Caja.Text = "";
         }
+        /* |=========================================================| */
+        /* |====|              Terminan los eventos             |====| */
+        /* |=========================================================| */
 
-        /* | Terminan los eventos | */
 
-        /* |==| Comienzan los métodos |==| */
+        /* |=========================================================| */
+        /* |====|             Comienzan los métodos             |====| */
+        /* |=========================================================| */
+
+        /* |====|    Método de dibujo de la memoria del PCB     |====| */
         public void Dibuja(List<PCB> Procesos, Panel panel)
         {
             // Elemento que permite que nos comuniquemos con el panel
@@ -100,7 +118,7 @@ namespace Simulacion
             int i = 0;
             foreach (PCB Proceso in Procesos)
             {
-                Pen [] Lapiz = new Pen[2];
+                Pen[] Lapiz = new Pen[2];
                 Lapiz[0] = new Pen(Procesos[i].pcbColor[1]);
                 Lapiz[1] = new Pen(Procesos[i].pcbColor[0]);
                 Lapiz[0].Width = 6;
@@ -125,6 +143,23 @@ namespace Simulacion
             // Reposicionamos el cursor del panel
             x = 4; y = 0;
         }
-        /* |==| Terminan los métodos |==| */
+
+        /* |====|           Algoritmo de Round Robin            |====| */
+        public void RoundR(List<PCB> Procesos)
+        {
+            // Leemos los Quantum que el usuario escogió.
+            int Quantum = tackQuantum.Value;
+            // Elemento que permite que nos comuniquemos con el panel
+            Graphics G = pnelCinco.CreateGraphics();
+
+            // Al llamarse el metodo de Round Robin, se ejecutara
+            // la impresión y reduccion de n (quantums) del proceso
+            // dependiendo de la prioridad que tenga
+
+
+        }
+        /* |=========================================================| */
+        /* |====|              Terminan los métodos             |====| */
+        /* |=========================================================| */
     }
 }
