@@ -29,6 +29,7 @@ namespace Simulacion
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSimulacion));
             this.grpbProcesos = new System.Windows.Forms.GroupBox();
             this.lblPCB = new System.Windows.Forms.Label();
             this.tabProcesos = new System.Windows.Forms.ListView();
@@ -77,11 +78,11 @@ namespace Simulacion
             // lblPCB
             // 
             this.lblPCB.AutoSize = true;
-            this.lblPCB.Location = new System.Drawing.Point(471, 19);
+            this.lblPCB.Location = new System.Drawing.Point(508, 19);
             this.lblPCB.Name = "lblPCB";
-            this.lblPCB.Size = new System.Drawing.Size(89, 13);
+            this.lblPCB.Size = new System.Drawing.Size(86, 13);
             this.lblPCB.TabIndex = 8;
-            this.lblPCB.Text = "PCB del proceso.";
+            this.lblPCB.Text = "PCB del proceso";
             this.lblPCB.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tabProcesos
@@ -110,21 +111,22 @@ namespace Simulacion
             // Nombre
             // 
             this.Nombre.Text = "Nombre";
-            this.Nombre.Width = 86;
+            this.Nombre.Width = 83;
             // 
             // EBT
             // 
             this.EBT.Text = "EBT";
-            this.EBT.Width = 53;
+            this.EBT.Width = 33;
             // 
             // Usuario
             // 
             this.Usuario.Text = "Usuario";
+            this.Usuario.Width = 122;
             // 
             // Estado
             // 
             this.Estado.Text = "Estado";
-            this.Estado.Width = 82;
+            this.Estado.Width = 46;
             // 
             // label4
             // 
@@ -259,6 +261,8 @@ namespace Simulacion
             this.Controls.Add(this.pnelProcesO);
             this.Controls.Add(this.pnelProcessI);
             this.Controls.Add(this.grpbProcesos);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmSimulacion";
             this.Text = "Simulacion de procesos";
             this.grpbProcesos.ResumeLayout(false);

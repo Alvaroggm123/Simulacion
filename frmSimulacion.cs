@@ -125,5 +125,6 @@ namespace Simulacion
             // Reposicionamos el cursor del panel
             x = 4; y = 0;
         }
+        /* |==| Terminan los métodos |==| */
     }
 }
