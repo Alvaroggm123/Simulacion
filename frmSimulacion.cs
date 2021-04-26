@@ -18,10 +18,12 @@ namespace Simulacion
         List<PCB> Process = new List<PCB>();
         string[] Usuarios = { "root", "aggm123", "aranzagtz",
         /* |==========| */    "Anonymous","Erasmo","MikeCrack",
-        /* |==========| */    "Rubiuh","Vegeta777","Kim.com" };
+        /* |==========| */    "Rubiuh","Vegeta777","Kim.com","UlisesGtz",
+                              "User200", "Maxima200","eulalio99","Felip0898",};
         string[] Ejecutables = { "Firefox", "Explorer", "Virus",
         /* |=============| */    "Chrome", "Calculadora", "Apoint",
-        /* |=============| */    "Agenservice", "System","Phishing" };
+        /* |=============| */    "Agenservice", "System","Phishing",
+                                 "Arduino","Recorte","Spotify","Skype" };
         // Index, width, height, xCoord, yCoord, RoundRobinPosition
         int Index = 0, w = 5, h = 10, x = 4, y = 0, rrIndex = 0;
         /* |=========================================================| */
@@ -69,8 +71,8 @@ namespace Simulacion
             // Validamos el tiempo de llegada con base en el anterior (si es que existe)
             // y la cantidad de ciclos que se le aplicarán.
             int InTime = 0;
-            if (Index > 0) InTime = Ran.Next(Process[Index-1].pcbInTime, Process[Index-1].pcbInTime + 
-                Process[Index-1].pcbMemory);
+            if (Index > 0) InTime = Ran.Next(Process[Index - 1].pcbInTime, Process[Index - 1].pcbInTime +
+                Process[Index - 1].pcbMemory);
 
             // Agregamos nuevo elemento a la lista del PCB.
             Process.Add(new PCB(
@@ -171,7 +173,23 @@ namespace Simulacion
             // Al llamarse el metodo de Round Robin, se ejecutara
             // la impresión y reduccion de n (quantums) del proceso
             // dependiendo de la prioridad que tenga
+            int i = 0;
+            foreach (PCB Proceso in Procesos)
+            {
+                Pen[] Lapiz = new Pen[2];
+                Lapiz[0] = new Pen(Procesos[i].pcbColor[1]);
+                Lapiz[1] = new Pen(Procesos[i].pcbColor[0]);
+                Lapiz[0].Width = 6;
+                Lapiz[1].Width = 6;
+                if (Procesos[Index].pcbPriority == 1)
+                {
+                    G.DrawRectangle(Lapiz[0], new Rectangle(x, y - 1, w, h + 2));
+                    G.DrawRectangle(Lapiz[1], new Rectangle(x, y, w, h / 2));
+                }
+            }
 
+
+            
 
         }
         /* |=========================================================| */
