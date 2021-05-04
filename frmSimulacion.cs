@@ -25,7 +25,7 @@ namespace Simulacion
         /* |=============| */    "Agenservice", "System","Phishing",
                                  "Arduino","Recorte","Spotify","Skype" };
         // Index, width, height, xCoord, yCoord, RoundRobinPosition
-        int Index = 0, w = 5, h = 10, x = 4, y = 0, rrIndex = 0;
+        int Index = 0, w = 5, h = 10, x = 4, y = 0;
 
         /* |=========================================================| */
         /* |====|          Comienzan los eventos                |====| */
@@ -53,8 +53,15 @@ namespace Simulacion
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
-            // Llamada al método de agregar elemento
-            Agregar();
+            // Validamos que no se exceda la cantidad de elementos.
+            if (Process.Sum(item => item.pcbMemory) < 255)
+                // Agregamos un proceso mas a el list principal
+                Agregar();
+            // De lo contrario solamente se dibuja.
+            else Dibuja(Process, pnelProcesO);
+
+            // Elemento auxiliar para conocer la cantidad de bloques
+            lblProcesado.Text="Cantidad de bloques de memoria = "+ Process.Sum(item => item.pcbMemory);
         }
         // Evento Quantum
         private void timQuant_Tick(object sender, EventArgs e)
@@ -63,8 +70,12 @@ namespace Simulacion
             Random Ran = new Random();
 
             // Validamos la posibilidad de agregar un nuevo proceso
-            if (Convert.ToInt32(Ran.Next(0,100)) == 3)
-                Agregar();
+            if (Convert.ToInt32(Ran.Next(0, 100)) == 3)
+                // Validamos que no se exceda la cantidad de elementos.
+                if (Process.Sum(item => item.pcbMemory) < 255)
+                    Agregar();
+                // De lo contrario solamente se dibuja.
+                else Dibuja(Process, pnelProcesO);
         }
 
         private void frmSimulacion_FormClosing(object sender, FormClosingEventArgs e)

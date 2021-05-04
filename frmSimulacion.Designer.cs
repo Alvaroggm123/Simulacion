@@ -53,9 +53,9 @@ namespace Simulacion
             this.pnelProcessI = new System.Windows.Forms.Panel();
             this.pnelProcesO = new System.Windows.Forms.Panel();
             this.pnelCinco = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblPCBoriginal = new System.Windows.Forms.Label();
+            this.lblPCBordenado = new System.Windows.Forms.Label();
+            this.lblProcesado = new System.Windows.Forms.Label();
             this.timQuant = new System.Windows.Forms.Timer(this.components);
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).BeginInit();
@@ -261,35 +261,35 @@ namespace Simulacion
             this.pnelCinco.Size = new System.Drawing.Size(776, 159);
             this.pnelCinco.TabIndex = 6;
             // 
-            // label1
+            // lblPCBoriginal
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 197);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Representación del proceso original:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblPCBoriginal.AutoSize = true;
+            this.lblPCBoriginal.Location = new System.Drawing.Point(113, 197);
+            this.lblPCBoriginal.Name = "lblPCBoriginal";
+            this.lblPCBoriginal.Size = new System.Drawing.Size(179, 13);
+            this.lblPCBoriginal.TabIndex = 1;
+            this.lblPCBoriginal.Text = "Representación del proceso original:";
+            this.lblPCBoriginal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // lblPCBordenado
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(467, 197);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(253, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Ordenamiento del proceso con base en su prioridad:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblPCBordenado.AutoSize = true;
+            this.lblPCBordenado.Location = new System.Drawing.Point(467, 197);
+            this.lblPCBordenado.Name = "lblPCBordenado";
+            this.lblPCBordenado.Size = new System.Drawing.Size(253, 13);
+            this.lblPCBordenado.TabIndex = 3;
+            this.lblPCBordenado.Text = "Ordenamiento del proceso con base en su prioridad:";
+            this.lblPCBordenado.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label3
+            // lblProcesado
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(234, 393);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(324, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Ejecución de los procesos con base en planificación Round Robin:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblProcesado.AutoSize = true;
+            this.lblProcesado.Location = new System.Drawing.Point(234, 393);
+            this.lblProcesado.Name = "lblProcesado";
+            this.lblProcesado.Size = new System.Drawing.Size(324, 13);
+            this.lblProcesado.TabIndex = 5;
+            this.lblProcesado.Text = "Ejecución de los procesos con base en planificación Round Robin:";
+            this.lblProcesado.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // timQuant
             // 
@@ -302,9 +302,9 @@ namespace Simulacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(803, 585);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblProcesado);
+            this.Controls.Add(this.lblPCBordenado);
+            this.Controls.Add(this.lblPCBoriginal);
             this.Controls.Add(this.pnelCinco);
             this.Controls.Add(this.pnelProcesO);
             this.Controls.Add(this.pnelProcessI);
@@ -346,9 +346,9 @@ namespace Simulacion
         private System.Windows.Forms.Panel pnelCinco;
         private System.Windows.Forms.ColumnHeader Prioridad;
         private System.Windows.Forms.ColumnHeader pcbInTime;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPCBoriginal;
+        private System.Windows.Forms.Label lblPCBordenado;
+        private System.Windows.Forms.Label lblProcesado;
         private System.Windows.Forms.Timer timQuant;
     }
 }
