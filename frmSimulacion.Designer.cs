@@ -29,6 +29,7 @@ namespace Simulacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSimulacion));
             this.grpbProcesos = new System.Windows.Forms.GroupBox();
             this.lblPCB = new System.Windows.Forms.Label();
@@ -55,6 +56,7 @@ namespace Simulacion
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.timQuant = new System.Windows.Forms.Timer(this.components);
             this.grpbProcesos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).BeginInit();
             this.SuspendLayout();
@@ -289,6 +291,10 @@ namespace Simulacion
             this.label3.Text = "Ejecución de los procesos con base en planificación Round Robin:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // timQuant
+            // 
+            this.timQuant.Tick += new System.EventHandler(this.timQuant_Tick);
+            // 
             // frmSimulacion
             // 
             this.AcceptButton = this.cmdAgregar;
@@ -307,6 +313,7 @@ namespace Simulacion
             this.MaximizeBox = false;
             this.Name = "frmSimulacion";
             this.Text = "Simulacion de procesos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSimulacion_FormClosing);
             this.grpbProcesos.ResumeLayout(false);
             this.grpbProcesos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tackQuantum)).EndInit();
@@ -342,6 +349,7 @@ namespace Simulacion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timQuant;
     }
 }
 

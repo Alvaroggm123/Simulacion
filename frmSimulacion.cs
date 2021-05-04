@@ -26,12 +26,15 @@ namespace Simulacion
                                  "Arduino","Recorte","Spotify","Skype" };
         // Index, width, height, xCoord, yCoord, RoundRobinPosition
         int Index = 0, w = 5, h = 10, x = 4, y = 0, rrIndex = 0;
+
         /* |=========================================================| */
         /* |====|          Comienzan los eventos                |====| */
         /* |=========================================================| */
         public frmSimulacion()
         {
             InitializeComponent();
+            // Inicializamos el timer
+            timQuant.Start();
         }
         /* |=========================================================| */
         /* |====|             Comienzan los eventos             |====| */
@@ -41,81 +44,33 @@ namespace Simulacion
             // Validamos que existan elementos en la lista
             if (Index >= 2)
             {
-                // Compiamos lista respecto a la original
-                // considerando cambiar de ruta de memoria
-                List<PCB> Procesosround = Process.ToList();
-
-                // Llamamos al metodo de dibujo del 
-                Dibuja(Procesosround, pnelProcesO);
-                RoundR(Procesosround);
+                List<PCB> ProcesosOrd = Process.ToList();
+                // Ordenamos con base en la prioridad
+                ProcesosOrd.Sort((p, q) => p.pcbPriority.CompareTo(q.pcbPriority));
+                Dibuja(ProcesosOrd, pnelProcesO);
             }
         }
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
+            // Llamada al método de agregar elemento
+            Agregar();
+        }
+        // Evento Quantum
+        private void timQuant_Tick(object sender, EventArgs e)
+        {
             // Generación de numeros aleatorios
             Random Ran = new Random();
-            string Usuario = Usuarios[Ran.Next(0, Usuarios.Length)];
 
-            // Asignación de elementos a cajas de texto en caso de que se encuentren nulas.
-            if (txtProcessM.Text != "" && txtProcessN.Text != "")
-                Usuario = "Dios";
-            else
-            {
-                if (txtProcessN.Text == "")
-                    txtProcessN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
-                if (txtProcessM.Text == "")
-                    txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
-            }
+            // Validamos la posibilidad de agregar un nuevo proceso
+            if (Convert.ToInt32(Ran.Next(0,100)) == 3)
+                Agregar();
+        }
 
-            // Validamos el tiempo de llegada con base en el anterior (si es que existe)
-            // y la cantidad de ciclos que se le aplicarán.
-            int InTime = 0;
-            if (Index > 0) InTime = Ran.Next(Process[Index - 1].pcbInTime, Process[Index - 1].pcbInTime +
-                Process[Index - 1].pcbMemory);
-
-            // Agregamos nuevo elemento a la lista del PCB.
-            Process.Add(new PCB(
-                Index,                                  // Identificador unico
-                txtProcessN.Text,                       // Nombre
-                Ran.Next(1, 6),                         // Prioridad
-                InTime,                                 // Tiempo de llegada
-                Usuario,                                // Usuario
-                0,                                      // Estado ( Nuevo )
-                Convert.ToInt32(txtProcessM.Text)));    // EBT 
-
-            // Llamamos al evento que imprime los rectangulos
-            Dibuja(Process, pnelProcessI);
-
-
-            // Agregamos los elementos a la lista (Tabla)
-            // Definición de la listView
-            ListViewItem Elemento = new ListViewItem(Convert.ToString(Process[Index].pcbPID));
-
-            // Ingresamos elementos de cada sub itemn del PCB
-            Elemento.SubItems.Add(Process[Index].pcbName);
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbInTime));
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
-            Elemento.SubItems.Add(Process[Index].pcbUser);
-            string Estado = "Nuevo";
-            switch (Process[Index].pcbState)
-            {
-                case 1: Estado = "Listo"; break;
-                case 2: Estado = "Ejecución"; break;
-                case 3: Estado = "Bloqueado"; break;
-                case 4: Estado = "Finalizado"; break;
-            }
-            Elemento.SubItems.Add(Estado);
-            Elemento.BackColor = Process[Index].pcbColor[0];
-            tabProcesos.Items.Add(Elemento);
-
-            // Recorremos el apuntador
-            Index++;
-            // Limpiamos las cajas de texto
-            foreach (Control Caja in grpbProcesos.Controls)
-                if (Caja is TextBox)
-                    Caja.Text = "";
+        private void frmSimulacion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Finalizamos el timer.
+            timQuant.Stop();
         }
         /* |=========================================================| */
         /* |====|              Terminan los eventos             |====| */
@@ -187,10 +142,73 @@ namespace Simulacion
                     G.DrawRectangle(Lapiz[1], new Rectangle(x, y, w, h / 2));
                 }
             }
+        }
+        // Método que agrega un nuevo PCB
+        public void Agregar()
+        {
+            // Generación de numeros aleatorios
+            Random Ran = new Random();
+            string Usuario = Usuarios[Ran.Next(0, Usuarios.Length)];
+
+            // Asignación de elementos a cajas de texto en caso de que se encuentren nulas.
+            if (txtProcessM.Text != "" && txtProcessN.Text != "")
+                Usuario = "Dios";
+            else
+            {
+                if (txtProcessN.Text == "")
+                    txtProcessN.Text = Ejecutables[Ran.Next(0, Ejecutables.Length)];
+                if (txtProcessM.Text == "")
+                    txtProcessM.Text = Convert.ToString(Ran.Next(1, 10));
+            }
+
+            // Validamos el tiempo de llegada con base en el anterior (si es que existe)
+            // y la cantidad de ciclos que se le aplicarán.
+            int InTime = 0;
+            if (Index > 0) InTime = Ran.Next(Process[Index - 1].pcbInTime, Process[Index - 1].pcbInTime +
+                Process[Index - 1].pcbMemory);
+
+            // Agregamos nuevo elemento a la lista del PCB.
+            Process.Add(new PCB(
+                Index,                                  // Identificador unico
+                txtProcessN.Text,                       // Nombre
+                Ran.Next(1, 6),                         // Prioridad
+                InTime,                                 // Tiempo de llegada
+                Usuario,                                // Usuario
+                0,                                      // Estado ( Nuevo )
+                Convert.ToInt32(txtProcessM.Text)));    // EBT 
+
+            // Llamamos al evento que imprime los rectangulos
+            Dibuja(Process, pnelProcessI);
 
 
-            
+            // Agregamos los elementos a la lista (Tabla)
+            // Definición de la listView
+            ListViewItem Elemento = new ListViewItem(Convert.ToString(Process[Index].pcbPID));
 
+            // Ingresamos elementos de cada sub itemn del PCB
+            Elemento.SubItems.Add(Process[Index].pcbName);
+            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
+            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbInTime));
+            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
+            Elemento.SubItems.Add(Process[Index].pcbUser);
+            string Estado = "Nuevo";
+            switch (Process[Index].pcbState)
+            {
+                case 1: Estado = "Listo"; break;
+                case 2: Estado = "Ejecución"; break;
+                case 3: Estado = "Bloqueado"; break;
+                case 4: Estado = "Finalizado"; break;
+            }
+            Elemento.SubItems.Add(Estado);
+            Elemento.BackColor = Process[Index].pcbColor[0];
+            tabProcesos.Items.Add(Elemento);
+
+            // Recorremos el apuntador
+            Index++;
+            // Limpiamos las cajas de texto
+            foreach (Control Caja in grpbProcesos.Controls)
+                if (Caja is TextBox)
+                    Caja.Text = "";
         }
         /* |=========================================================| */
         /* |====|              Terminan los métodos             |====| */
