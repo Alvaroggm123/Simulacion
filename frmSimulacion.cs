@@ -191,28 +191,11 @@ namespace Simulacion
             // Llamamos al evento que imprime los rectangulos
             Dibuja(Process, pnelProcessI);
 
-
-            // Agregamos los elementos a la lista (Tabla)
-            // Definición de la listView
-            ListViewItem Elemento = new ListViewItem(Convert.ToString(Process[Index].pcbPID));
-
-            // Ingresamos elementos de cada sub itemn del PCB
-            Elemento.SubItems.Add(Process[Index].pcbName);
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbPriority));
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbInTime));
-            Elemento.SubItems.Add(Convert.ToString(Process[Index].pcbMemory));
-            Elemento.SubItems.Add(Process[Index].pcbUser);
-            string Estado = "Nuevo";
-            switch (Process[Index].pcbState)
-            {
-                case 1: Estado = "Listo"; break;
-                case 2: Estado = "Ejecución"; break;
-                case 3: Estado = "Bloqueado"; break;
-                case 4: Estado = "Finalizado"; break;
-            }
-            Elemento.SubItems.Add(Estado);
-            Elemento.BackColor = Process[Index].pcbColor[0];
-            tabProcesos.Items.Add(Elemento);
+            // |===| Agregamos los elementos a la Tabla |===|
+            // "limpiamos" la tabla
+            datagvPCB.DataSource = null;
+            // agregamos los nuevos elementos.
+            datagvPCB.DataSource = Process;
 
             // Recorremos el apuntador
             Index++;
