@@ -61,7 +61,7 @@ namespace Simulacion
             Random Ran = new Random();
 
             // Validamos la posibilidad de agregar un nuevo proceso
-            if (Convert.ToInt32(Ran.Next(0, 5)) == 3)
+            if (Convert.ToInt32(Ran.Next(0, 100)) == 3)
                 // Validamos que no se exceda la cantidad de elementos.
                 if (ProcesoEntrante.Sum(item => item.pcbQuantum) < 255)
                     Agregar();
@@ -108,37 +108,40 @@ namespace Simulacion
         /* |====|    Método de dibujo de la memoria del PCB     |====| */
         public void Dibuja(List<PCB> Procesos, Panel panel)
         {
-            // Limpiamos el panel
-            panel.Controls.Clear();
+
             // Elemento que permite que nos comuniquemos con el panel
             Graphics G = panel.CreateGraphics();
 
+            // Limpieza de panel
+            G.Clear(Color.DimGray);
+
             // Index local
             int i = 0;
-            foreach (PCB Proceso in Procesos)
-            {
-                Pen[] Lapiz = new Pen[2];
-                Lapiz[0] = new Pen(Procesos[i].pcbColor[1]);
-                Lapiz[1] = new Pen(Procesos[i].pcbColor[0]);
-                Lapiz[0].Width = 6;
-                Lapiz[1].Width = 6;
-
-                for (int j = 0; j < Procesos[i].pcbQuantum; j++)
+            if (Procesos.Sum(item => item.pcbQuantum) > 0)
+                foreach (PCB Proceso in Procesos)
                 {
-                    // Validamos que el cursor se encuentre dentro del rango de las x
-                    if (x > panel.Width - w * 3)
+                    Pen[] Lapiz = new Pen[2];
+                    Lapiz[0] = new Pen(Procesos[i].pcbColor[1]);
+                    Lapiz[1] = new Pen(Procesos[i].pcbColor[0]);
+                    Lapiz[0].Width = 6;
+                    Lapiz[1].Width = 6;
+
+                    for (int j = 0; j < Procesos[i].pcbQuantum; j++)
                     {
-                        y += h * 2 - 3;
-                        x = 4;
+                        // Validamos que el cursor se encuentre dentro del rango de las x
+                        if (x > panel.Width - w * 3)
+                        {
+                            y += h * 2 - 3;
+                            x = 4;
+                        }
+                        // Dibujamos los rectangulos que permiten ver la prioridad y el proceso
+                        G.DrawRectangle(Lapiz[0], new Rectangle(x, y - 1, w, h + 2));
+                        G.DrawRectangle(Lapiz[1], new Rectangle(x, y, w, h / 2));
+                        x += w + w / 2 + 6;
                     }
-                    // Dibujamos los rectangulos que permiten ver la prioridad y el proceso
-                    G.DrawRectangle(Lapiz[0], new Rectangle(x, y - 1, w, h + 2));
-                    G.DrawRectangle(Lapiz[1], new Rectangle(x, y, w, h / 2));
-                    x += w + w / 2 + 6;
+                    // Cambiamos el index del elemento a imprimir
+                    i++;
                 }
-                // Cambiamos el index del elemento a imprimir
-                i++;
-            }
             // Reposicionamos el cursor del panel
             x = 4; y = 0;
         }
@@ -204,13 +207,16 @@ namespace Simulacion
         /* |====|           Algoritmo de Round Robin            |====| */
         List<PCB> RoundR(List<PCB> Procesos)
         {
+            /* |====|              Aquí se puede validar el tiempo.             |====| */
             // Trabajamos con la lista de procesos salientes
             int i = 0;
             while (Procesos[i].pcbQuantum < 1)
                 i++;
-            // Aquí validamos el track
             if (Procesos[i].pcbQuantum >= tackQuantum.Value)
                 Procesos[i].pcbQuantum -= tackQuantum.Value;
+            else
+                Procesos[i].pcbQuantum = 0;
+            // Aquí validamos el track
             return Procesos;
 
         }

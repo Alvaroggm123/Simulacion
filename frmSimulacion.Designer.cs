@@ -80,13 +80,19 @@ namespace Simulacion
             // 
             // datagvLlegada
             // 
-            this.datagvLlegada.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.datagvLlegada.AllowUserToAddRows = false;
+            this.datagvLlegada.AllowUserToDeleteRows = false;
+            this.datagvLlegada.AllowUserToResizeColumns = false;
+            this.datagvLlegada.AllowUserToResizeRows = false;
+            this.datagvLlegada.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagvLlegada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagvLlegada.Location = new System.Drawing.Point(285, 16);
             this.datagvLlegada.Margin = new System.Windows.Forms.Padding(2);
             this.datagvLlegada.Name = "datagvLlegada";
+            this.datagvLlegada.ReadOnly = true;
             this.datagvLlegada.RowHeadersWidth = 51;
             this.datagvLlegada.RowTemplate.Height = 24;
+            this.datagvLlegada.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagvLlegada.Size = new System.Drawing.Size(486, 158);
             this.datagvLlegada.TabIndex = 8;
             // 
@@ -193,13 +199,19 @@ namespace Simulacion
             // 
             // datagvLlegada0
             // 
-            this.datagvLlegada0.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.datagvLlegada0.AllowUserToAddRows = false;
+            this.datagvLlegada0.AllowUserToDeleteRows = false;
+            this.datagvLlegada0.AllowUserToResizeColumns = false;
+            this.datagvLlegada0.AllowUserToResizeRows = false;
+            this.datagvLlegada0.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagvLlegada0.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagvLlegada0.Location = new System.Drawing.Point(401, 213);
             this.datagvLlegada0.Margin = new System.Windows.Forms.Padding(2);
             this.datagvLlegada0.Name = "datagvLlegada0";
+            this.datagvLlegada0.ReadOnly = true;
             this.datagvLlegada0.RowHeadersWidth = 51;
             this.datagvLlegada0.RowTemplate.Height = 24;
+            this.datagvLlegada0.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagvLlegada0.Size = new System.Drawing.Size(391, 158);
             this.datagvLlegada0.TabIndex = 3;
             // 
@@ -247,13 +259,19 @@ namespace Simulacion
             // 
             // datagvCola
             // 
-            this.datagvCola.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.datagvCola.AllowUserToAddRows = false;
+            this.datagvCola.AllowUserToDeleteRows = false;
+            this.datagvCola.AllowUserToResizeColumns = false;
+            this.datagvCola.AllowUserToResizeRows = false;
+            this.datagvCola.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagvCola.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagvCola.Location = new System.Drawing.Point(401, 396);
             this.datagvCola.Margin = new System.Windows.Forms.Padding(2);
             this.datagvCola.Name = "datagvCola";
+            this.datagvCola.ReadOnly = true;
             this.datagvCola.RowHeadersWidth = 51;
             this.datagvCola.RowTemplate.Height = 24;
+            this.datagvCola.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagvCola.Size = new System.Drawing.Size(391, 158);
             this.datagvCola.TabIndex = 6;
             // 
