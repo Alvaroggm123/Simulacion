@@ -34,21 +34,23 @@ namespace Simulacion
         public frmSimulacion()
         {
             InitializeComponent();
-            // Inicializamos el timer
-            //timQuant.Start();
         }
         /* |=========================================================| */
         /* |====|             Comienzan los eventos             |====| */
         /* |=========================================================| */
         private void cmdProcesar_Click(object sender, EventArgs e)
         {
-            
+            // Inicializamos el timer
+            if (timQuant.Enabled == false)
+                timQuant.Enabled= !timQuant.Enabled;
+            else
+                timQuant.Enabled = !timQuant.Enabled;
         }
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
             // Validamos que no se exceda la cantidad de elementos.
-            if (ProcesoEntrante.Sum(item => item.pcbQuantum) < 255)
+            if (ProcesoEntrante.Sum(item => item.pcbQuantum) < 512)
                 // Agregamos un proceso mas a el list principal
                 Agregar();
             // De lo contrario solamente se dibuja.
@@ -61,9 +63,9 @@ namespace Simulacion
             Random Ran = new Random();
 
             // Validamos la posibilidad de agregar un nuevo proceso
-            if (Convert.ToInt32(Ran.Next(0, 100)) == 3)
+            if (Convert.ToInt32(Ran.Next(0, 5)) == 3)
                 // Validamos que no se exceda la cantidad de elementos.
-                if (ProcesoEntrante.Sum(item => item.pcbQuantum) < 255)
+                if (ProcesoEntrante.Sum(item => item.pcbQuantum) < 512)
                     Agregar();
                 // De lo contrario solamente se dibuja.
                 else Dibuja(ProcesoEntrante, pnelCola);
@@ -89,6 +91,11 @@ namespace Simulacion
                     ProcesoSaliente=RoundR(ProcesosOrd);
                 Dibuja(ProcesoSaliente, pnelCola);
             }
+        }
+
+        private void datagvLlegada_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
         private void frmSimulacion_FormClosing(object sender, FormClosingEventArgs e)
@@ -182,7 +189,7 @@ namespace Simulacion
             ProcesoSaliente.Add(new PCB(
                 Index,                                  // Identificador unico
                 txtProcessN.Text,                       // Nombre
-                ProcesoEntrante[Index].pcbPriority,    // Prioridad
+                ProcesoEntrante[Index].pcbPriority,     // Prioridad
                 InTime,                                 // Tiempo de llegada
                 Usuario,                                // Usuario
                 0,                                      // Estado ( Nuevo )
@@ -196,6 +203,8 @@ namespace Simulacion
             datagvLlegada.DataSource = null;
             // agregamos los nuevos elementos.
             datagvLlegada.DataSource = ProcesoEntrante;
+
+            // Aquí van las etiquetas de las columnas
 
             // Recorremos el apuntador
             Index++;
@@ -211,11 +220,27 @@ namespace Simulacion
             // Trabajamos con la lista de procesos salientes
             int i = 0;
             while (Procesos[i].pcbQuantum < 1)
+            {
+                if (Procesos[i].pcbQuantum == 0)
+                {
+                    Procesos[i].pcbState = 4;
+                    // Eliminamos el elemento ya trabajado
+                    ProcesoEntrante[i].pcbState = Procesos[i].pcbState;
+                }
                 i++;
+            }
             if (Procesos[i].pcbQuantum >= tackQuantum.Value)
+            {
                 Procesos[i].pcbQuantum -= tackQuantum.Value;
+                Procesos[i].pcbState = 2;
+                ProcesoEntrante[i].pcbState = Procesos[i].pcbState;
+            }
             else
+            {
                 Procesos[i].pcbQuantum = 0;
+                Procesos[i].pcbState = 4;
+                ProcesoEntrante[i].pcbState = Procesos[i].pcbState;
+            }
             // Aquí validamos el track
             return Procesos;
 
@@ -225,3 +250,38 @@ namespace Simulacion
         /* |=========================================================| */
     }
 }
+/* |=========================================================| */
+/* |                                                         | */
+/* |              Alumnos y numeros de control:              | */
+/* |     González Martínez Álvaro Gabriel - 19211651         | */
+/* |                                                         | */
+/* |=========================================================| */
+/* |                                                         | */
+/* |                 Prioridad de procesos                   | */
+/* |                                                         | */
+/* |    _________________________________________________    | */
+/* |    | Nombre de la prioridad del proceso  |  Valor  |    | */
+/* |    |-----------------------------------------------|    | */
+/* |    | Tiempo real                         |    1    |    | */
+/* |    | Alta prioridad                      |    2    |    | */
+/* |    | Prioridad arriba de la normal       |    3    |    | */
+/* |    | Prioridad normal                    |    4    |    | */
+/* |    | Prioridad de bajo de la normal      |    5    |    | */
+/* |    | Baja prioridad                      |    6    |    | */
+/* |    |_____________________________________|_________|    | */
+/* |                                                         | */
+/* |=========================================================| */
+/* |                                                         | */
+/* |                 Estados disponibles                     | */
+/* |                                                         | */
+/* |    _________________________________________________    | */
+/* |    |    Nombre del estado del proceso    |  Valor  |    | */
+/* |    |-----------------------------------------------|    | */
+/* |    | Estado de nuevo       ( New     )   |    0    |    | */
+/* |    | Estado de listo       ( Ready   )   |    1    |    | */
+/* |    | Estado en ejecucion   ( Running )   |    2    |    | */
+/* |    | Estado de bloqueo     ( Blocked )   |    3    |    | */
+/* |    | Estado de finalizado  ( Exit    )   |    4    |    | */
+/* |    |_____________________________________|_________|    | */
+/* |                                                         | */
+/* |=========================================================| */

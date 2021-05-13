@@ -20,7 +20,6 @@
 /* |                                                         | */
 /* |              Alumnos y numeros de control:              | */
 /* |     González Martínez Álvaro Gabriel - 19211651         | */
-/* |              Gutierrez Mora Aranza -                    | */
 /* |                                                         | */
 /* |=========================================================| */
 /* |                                                         | */
@@ -44,11 +43,11 @@
 /* |    _________________________________________________    | */
 /* |    |    Nombre del estado del proceso    |  Valor  |    | */
 /* |    |-----------------------------------------------|    | */
-/* |    | Estado de nuevo       ( New     )   |    1    |    | */
-/* |    | Estado de listo       ( Ready   )   |    2    |    | */
-/* |    | Estado en ejecucion   ( Running )   |    3    |    | */
-/* |    | Estado de bloqueo     ( Blocked )   |    4    |    | */
-/* |    | Estado de finalizado  ( Exit    )   |    5    |    | */
+/* |    | Estado de nuevo       ( New     )   |    0    |    | */
+/* |    | Estado de listo       ( Ready   )   |    1    |    | */
+/* |    | Estado en ejecucion   ( Running )   |    2    |    | */
+/* |    | Estado de bloqueo     ( Blocked )   |    3    |    | */
+/* |    | Estado de finalizado  ( Exit    )   |    4    |    | */
 /* |    |_____________________________________|_________|    | */
 /* |                                                         | */
 /* |=========================================================| */
