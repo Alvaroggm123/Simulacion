@@ -86,7 +86,7 @@ namespace Simulacion
                 datagvCola.DataSource = null;
                 // agregamos los nuevos elementos.
                 datagvCola.DataSource = ProcesosOrd;
-                datagvCola.Columns[0].HeaderText = "IDE";
+                datagvCola.Columns[0].HeaderText = "ID";
                 datagvCola.Columns[1].HeaderText = "Nombre";
                 datagvCola.Columns[2].HeaderText = "Prioridad";
                 datagvCola.Columns[3].HeaderText = "Tiempo llegada";
@@ -212,7 +212,7 @@ namespace Simulacion
             datagvLlegada.DataSource = ProcesoEntrante;
 
             // Aquí van las etiquetas de las columnas
-            datagvLlegada.Columns[0].HeaderText = "IDE";
+            datagvLlegada.Columns[0].HeaderText = "ID";
             datagvLlegada.Columns[1].HeaderText = "Nombre";
             datagvLlegada.Columns[2].HeaderText = "Prioridad";
             datagvLlegada.Columns[3].HeaderText = "Tiempo llegada";
