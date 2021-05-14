@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Simulacion
@@ -28,13 +24,20 @@ namespace Simulacion
         // Index, width, height, xCoord, yCoord, RoundRobinPosition
         int Index = 0, w = 5, h = 10, x = 4, y = 0;
 
+        Asignacion[] Tareas;
+
         /* |=========================================================| */
         /* |====|          Comienzan los eventos                |====| */
         /* |=========================================================| */
         public frmSimulacion()
         {
             InitializeComponent();
+            Tareas = new Asignacion[] { new Asignacion(0,"",0)};
+            dgvParticion.ClearSelection();
+            dgvParticion.DataSource = null;
+            dgvParticion.DataSource = Tareas;
         }
+
         /* |=========================================================| */
         /* |====|             Comienzan los eventos             |====| */
         /* |=========================================================| */
@@ -42,7 +45,7 @@ namespace Simulacion
         {
             // Inicializamos el timer
             if (timQuant.Enabled == false)
-                timQuant.Enabled= !timQuant.Enabled;
+                timQuant.Enabled = !timQuant.Enabled;
             else
                 timQuant.Enabled = !timQuant.Enabled;
         }
@@ -93,16 +96,12 @@ namespace Simulacion
                 datagvCola.Columns[4].HeaderText = "EBT";
                 datagvCola.Columns[5].HeaderText = "Usuario";
                 datagvCola.Columns[6].HeaderText = "Estado";
+                datagvCola.Columns[7].HeaderText = "Memoria";
                 // Llamada al metodo Round Robin con el arreglo ordenado si se tienen mas de n elementos
                 if (ProcesoSaliente.Sum(item => item.pcbQuantum) > 1)
-                    ProcesoSaliente=RoundR(ProcesosOrd);
+                    ProcesoSaliente = RoundR(ProcesosOrd);
                 Dibuja(ProcesoSaliente, pnelCola);
             }
-        }
-
-        private void datagvLlegada_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
 
         private void frmSimulacion_FormClosing(object sender, FormClosingEventArgs e)
@@ -219,6 +218,7 @@ namespace Simulacion
             datagvLlegada.Columns[4].HeaderText = "EBT";
             datagvLlegada.Columns[5].HeaderText = "Usuario";
             datagvLlegada.Columns[6].HeaderText = "Estado";
+            datagvLlegada.Columns[7].HeaderText = "Memoria";
             // Recorremos el apuntador
             Index++;
             // Limpiamos las cajas de texto
@@ -228,10 +228,11 @@ namespace Simulacion
         }
         /* |====|           Algoritmo de Round Robin            |====| */
         List<PCB> RoundR(List<PCB> Procesos)
-        {
+        { 
             /* |====|              Aquí se puede validar el tiempo.             |====| */
             // Trabajamos con la lista de procesos salientes
             int i = 0;
+            Procesos[i].pcbState = 1;
             while (Procesos[i].pcbQuantum < 1)
             {
                 if (Procesos[i].pcbQuantum == 0)
@@ -242,17 +243,40 @@ namespace Simulacion
                 }
                 i++;
             }
+            Procesos[i].pcbState = 2;
             if (Procesos[i].pcbQuantum >= tackQuantum.Value)
             {
+                Procesos[i].pcbState = 3;
+                Tareas[0].Proceso = Procesos[i].pcbName;
+                Tareas[0].EBT = Procesos[i].pcbQuantum;
+                Tareas[0].Tamaño = Procesos[i].pcbMemoriaProceso;
+                dgvParticion.ClearSelection();
+                dgvParticion.DataSource = null;
+                dgvParticion.DataSource = Tareas;
                 Procesos[i].pcbQuantum -= tackQuantum.Value;
-                Procesos[i].pcbState = 2;
+                ProcesoEntrante[i].pcbState = Procesos[i].pcbState;   
+            }
+            else if(Procesos[i].pcbQuantum < tackQuantum.Value)
+            {
+                Procesos[i].pcbState = 4;
+                string nombre = Procesos[i].pcbName;
+                Tareas[0].Tamaño = 0;
+                Tareas[0].EBT=0;
+                Tareas[0].Proceso= "";
+                dgvParticion.ClearSelection();
+                dgvParticion.DataSource = null;
+                dgvParticion.DataSource = Tareas;
+                Procesos[i].pcbQuantum = 0;
                 ProcesoEntrante[i].pcbState = Procesos[i].pcbState;
             }
             else
             {
-                Procesos[i].pcbQuantum = 0;
+                
                 Procesos[i].pcbState = 4;
-                ProcesoEntrante[i].pcbState = Procesos[i].pcbState;
+                string nombre = Procesos[i].pcbName;
+                Tareas[0].Tamaño = 0;
+                Tareas[0].EBT = 0;
+                Tareas[0].Proceso = "";
             }
             // Aquí validamos el track
             return Procesos;
@@ -262,6 +286,7 @@ namespace Simulacion
         /* |====|              Terminan los métodos             |====| */
         /* |=========================================================| */
     }
+    
 }
 /* |=========================================================| */
 /* |                                                         | */

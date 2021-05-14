@@ -81,6 +81,8 @@ namespace Simulacion
 
         public Color[] pcbColor = new Color[2]; // Color que conserva el PCB
 
+        public int pcbMemoriaProceso { get; set; } //Memoria del proceso
+
         /* |==| Constructor con parametros de entrada |==| */
         public PCB(int pcbPID, string pcbName, int pcbPriority,int pcbInTime, string pcbUser, int pcbState, int pcbQuantum)
         {
@@ -118,6 +120,7 @@ namespace Simulacion
                     pcbColor[1] = Color.Magenta;
                     break;
             }
+            this.pcbMemoriaProceso = Ran.Next(100,1000);
         }
     }
 }
