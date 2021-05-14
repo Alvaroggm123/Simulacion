@@ -86,6 +86,13 @@ namespace Simulacion
                 datagvCola.DataSource = null;
                 // agregamos los nuevos elementos.
                 datagvCola.DataSource = ProcesosOrd;
+                datagvCola.Columns[0].HeaderText = "IDE";
+                datagvCola.Columns[1].HeaderText = "Nombre";
+                datagvCola.Columns[2].HeaderText = "Prioridad";
+                datagvCola.Columns[3].HeaderText = "Tiempo llegada";
+                datagvCola.Columns[4].HeaderText = "EBT";
+                datagvCola.Columns[5].HeaderText = "Usuario";
+                datagvCola.Columns[6].HeaderText = "Estado";
                 // Llamada al metodo Round Robin con el arreglo ordenado si se tienen mas de n elementos
                 if (ProcesoSaliente.Sum(item => item.pcbQuantum) > 1)
                     ProcesoSaliente=RoundR(ProcesosOrd);
@@ -205,7 +212,13 @@ namespace Simulacion
             datagvLlegada.DataSource = ProcesoEntrante;
 
             // Aquí van las etiquetas de las columnas
-
+            datagvLlegada.Columns[0].HeaderText = "IDE";
+            datagvLlegada.Columns[1].HeaderText = "Nombre";
+            datagvLlegada.Columns[2].HeaderText = "Prioridad";
+            datagvLlegada.Columns[3].HeaderText = "Tiempo llegada";
+            datagvLlegada.Columns[4].HeaderText = "EBT";
+            datagvLlegada.Columns[5].HeaderText = "Usuario";
+            datagvLlegada.Columns[6].HeaderText = "Estado";
             // Recorremos el apuntador
             Index++;
             // Limpiamos las cajas de texto
